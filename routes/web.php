@@ -13,7 +13,18 @@
 |
 */
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['prefix' => 'brincadeira'], function () use ($router) {
+    $router->get('/', function () use ($router) {
+        return $router->app->version();
+    });
+    $router->get('/', 'BrincadeiraController@index');
+    $router->post('/', 'BrincadeiraController@store');
+    $router->get('/{id}', 'BrincadeiraController@show');
+    $router->put('/{id}', 'BrincadeiraController@update');
+    $router->delete('/{id}', 'BrincadeiraController@destroy');
+});
+
+$router->group(['prefix' => 'tasks'], function () use ($router) {
     // Rota para listar todas as tasks (GET)
     $router->get('tasks', 'TaskController@index');
 
