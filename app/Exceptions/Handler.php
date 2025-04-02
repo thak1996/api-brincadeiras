@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use App\Services\ResponseService;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -49,6 +50,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        return parent::render($request, $exception);
+        return ResponseService::error(
+            $exception->getMessage(),
+            $exception->getCode() ?: 500
+        );
     }
 }
