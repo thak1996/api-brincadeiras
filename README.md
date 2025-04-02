@@ -30,6 +30,8 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
 ```bash
 docker-compose up --build -d
 
+composer install
+
 docker-compose exec app composer install
 
 docker-compose exec app php artisan migrate
