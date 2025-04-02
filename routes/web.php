@@ -13,23 +13,21 @@
 |
 */
 
-$router->group(['prefix' => 'brincadeira'], function () use ($router) {
-    $router->get('/', function () use ($router) {
-        return $router->app->version();
+$router->group(['prefix' => 'api'], function () use ($router) {
+    // Rotas para brincadeiras
+    $router->group(['prefix' => 'brincadeiras'], function () use ($router) {
+        $router->get('/', 'BrincadeiraController@index');
+        $router->post('/', 'BrincadeiraController@store');
+        $router->get('/{id}', 'BrincadeiraController@show');
+        $router->put('/{id}', 'BrincadeiraController@update');
+        $router->delete('/{id}', 'BrincadeiraController@destroy');
     });
-    $router->get('/', 'BrincadeiraController@index');
-    $router->post('/', 'BrincadeiraController@store');
-    $router->get('/{id}', 'BrincadeiraController@show');
-    $router->put('/{id}', 'BrincadeiraController@update');
-    $router->delete('/{id}', 'BrincadeiraController@destroy');
-});
 
-$router->group(['prefix' => 'tasks'], function () use ($router) {
-    // Rota para listar todas as tasks (GET)
-    $router->get('tasks', 'TaskController@index');
-
-    // Rota para criar uma nova task (POST)
-    $router->post('tasks', 'TaskController@store');
+    // Rotas para tasks
+    $router->group(['prefix' => 'tasks'], function () use ($router) {
+        $router->get('/', 'TaskController@index');
+        $router->post('/', 'TaskController@store');
+    });
 
     $router->get('/', function () use ($router) {
         return $router->app->version();
