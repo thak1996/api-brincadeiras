@@ -9,5 +9,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(TaskSeeder::class);
+        $this->call(BrincadeirasTableSeeder::class);
     }
 }
