@@ -1,0 +1,47 @@
+services:
+  app:
+    build: .
+    container_name: ${APP_NAME}_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    ports:
+      - "${APP_PORT}:8000"
+    depends_on:
+      - mysql
+    environment:
+      APP_NAME: ${APP_NAME}
+      APP_ENV: ${APP_ENV}
+      APP_KEY: ${APP_KEY}
+      APP_DEBUG: ${APP_DEBUG}
+      APP_URL: ${APP_URL}
+      APP_TIMEZONE: ${APP_TIMEZONE}
+      LOG_CHANNEL: ${LOG_CHANNEL}
+      LOG_SLACK_WEBHOOK_URL: ${LOG_SLACK_WEBHOOK_URL}
+      DB_CONNECTION: ${DB_CONNECTION}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      CACHE_DRIVER: ${CACHE_DRIVER}
+      QUEUE_CONNECTION: ${QUEUE_CONNECTION}
+    command: php -S 0.0.0.0:8000 -t public
+
+  mysql:
+    image: mysql:8.0
+    container_name: ${APP_NAME}_${DB_HOST}
+    hostname: ${APP_NAME}_${DB_HOST}
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
