@@ -16,20 +16,16 @@ class BrincadeirasTableSeeder extends Seeder
      */
     public function run()
     {
-        // Caminho para o arquivo JSON
         $jsonPath = database_path('data/brincadeiras.json');
 
-        // Verifica se o arquivo existe
         if (!File::exists($jsonPath)) {
             $this->command->error("Arquivo brincadeiras.json não encontrado em: $jsonPath");
             return;
         }
 
-        // Lê o conteúdo do arquivo JSON
         $jsonData = File::get($jsonPath);
         $brincadeiras = json_decode($jsonData, true)['brincadeiras'];
 
-        // Insere os dados no banco de dados
         foreach ($brincadeiras as $brincadeira) {
             DB::table('brincadeiras')->insert([
                 'titulo' => $brincadeira['titulo'],

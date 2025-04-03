@@ -19,12 +19,12 @@ class BrincadeiraController extends Controller
     public function store(Request $request): JsonResponse
     {
         $data = $this->validate($request, [
-            'categoria' => 'required|string|max:255',
+            'categoria' => 'required|string|in:' . implode(',', Brincadeira::CATEGORIA),
             'custo' => 'required|string|max:255',
             'descricao' => 'required|string',
-            'dificuldade' => 'required|string|max:255',
+            'dificuldade' => 'required|string|in:' . implode(',', Brincadeira::DIFICULDADE),
             'duracao' => 'required|string|max:255',
-            'faixa_etaria' => 'required|string|max:255',
+            'faixa_etaria' => 'required|string|in:' . implode(',', Brincadeira::FAIXA_ETARIA),
             'favorito' => 'nullable|boolean',
             'imagem' => 'nullable|string|max:255',
             'materiais' => 'required|array',
@@ -56,12 +56,12 @@ class BrincadeiraController extends Controller
         }
 
         $data = $this->validate($request, [
-            'categoria' => 'sometimes|string|max:255',
-            'custo' => 'sometimes|string|max:255',
-            'descricao' => 'sometimes|string',
-            'dificuldade' => 'sometimes|string|max:255',
-            'duracao' => 'sometimes|string|max:255',
-            'faixa_etaria' => 'sometimes|string|max:255',
+            'categoria' => 'required|string|in:' . implode(',', Brincadeira::CATEGORIA),
+            'custo' => 'required|string|max:255',
+            'descricao' => 'required|string',
+            'dificuldade' => 'required|string|in:' . implode(',', Brincadeira::DIFICULDADE),
+            'duracao' => 'required|string|max:255',
+            'faixa_etaria' => 'required|string|in:' . implode(',', Brincadeira::FAIXA_ETARIA),
             'favorito' => 'nullable|boolean',
             'imagem' => 'nullable|string|max:255',
             'materiais' => 'sometimes|array',
@@ -83,6 +83,6 @@ class BrincadeiraController extends Controller
 
         $brincadeira->delete();
 
-        return ResponseService::success(null);
+        return ResponseService::success(null, 204);
     }
 }

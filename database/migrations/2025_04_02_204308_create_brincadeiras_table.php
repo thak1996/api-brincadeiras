@@ -15,14 +15,14 @@ class CreateBrincadeirasTable extends Migration
     {
         Schema::create('brincadeiras', function (Blueprint $table) {
             $table->id();
-            $table->string('categoria');
+            $table->enum('categoria', ['jogos cognitivos', 'atividades físicas', 'artes', 'atividades sociais', 'jogos de tabuleiro', 'jogos de cartas']);
             $table->string('custo');
             $table->text('descricao');
-            $table->string('dificuldade');
+            $table->enum('dificuldade', ['fácil', 'médio', 'difícil']);
             $table->string('duracao');
-            $table->string('faixa_etaria');
-            $table->boolean('favorito')->default(false);
-            $table->string('imagem');
+            $table->enum('faixa_etaria', ['crianças', 'adolescente', 'idosos']);
+            $table->boolean('favorito')->nullable()->default(false);
+            $table->string('imagem')->nullable();
             $table->json('materiais');
             $table->string('titulo');
             $table->timestamps();
