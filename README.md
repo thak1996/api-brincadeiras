@@ -5,6 +5,7 @@
 ```bash
 docker-compose up --build -d
 
+# Usar apenas na inicialização do projeto
 composer install
 
 docker-compose exec app composer install
