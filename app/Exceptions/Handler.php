@@ -50,9 +50,43 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof ValidationException) {
+            return ResponseService::error(
+                'Erro de validação',
+                422,
+                $exception->errors()
+            );
+        }
+
+        if ($exception instanceof ModelNotFoundException) {
+            return ResponseService::error(
+                'Recurso não encontrado',
+                404
+            );
+        }
+
+        if ($exception instanceof AuthorizationException) {
+            return ResponseService::error(
+                'Acesso não autorizado',
+                403
+            );
+        }
+
+
+        if ($exception instanceof HttpException) {
+            return ResponseService::error(
+                $exception->getMessage(),
+                $exception->getStatusCode()
+            );
+        }
+
+        $statusCode = is_int($exception->getCode()) && $exception->getCode() > 0
+            ? $exception->getCode()
+            : 500;
+
         return ResponseService::error(
             $exception->getMessage(),
-            $exception->getCode() ?: 500
+            $statusCode
         );
     }
 }
