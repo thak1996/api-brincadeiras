@@ -20,15 +20,15 @@ class BrincadeiraController extends Controller
     {
         $data = $this->validate($request, [
             'categoria' => 'required|string|in:' . implode(',', Brincadeira::CATEGORIA),
-            'custo' => 'required|string|max:255',
+            'custo' => 'required|string|in:' . implode(',', Brincadeira::CUSTO),
             'descricao' => 'required|string',
             'dificuldade' => 'required|string|in:' . implode(',', Brincadeira::DIFICULDADE),
-            'duracao' => 'required|string|max:255',
+            'duracao' => 'required|string|in:' . implode(',', Brincadeira::DURACAO),
             'faixa_etaria' => 'required|string|in:' . implode(',', Brincadeira::FAIXA_ETARIA),
             'favorito' => 'nullable|boolean',
             'imagem' => 'nullable|string|max:255',
-            'materiais' => 'required|array',
-            'titulo' => 'required|string|max:255',
+            'materiais' => 'sometimes|array',
+            'titulo' => 'sometimes|string|max:255',
         ]);
 
         $brincadeira = Brincadeira::create($data);
@@ -57,10 +57,10 @@ class BrincadeiraController extends Controller
 
         $data = $this->validate($request, [
             'categoria' => 'required|string|in:' . implode(',', Brincadeira::CATEGORIA),
-            'custo' => 'required|string|max:255',
+            'custo' => 'required|string|in:' . implode(',', Brincadeira::CUSTO),
             'descricao' => 'required|string',
             'dificuldade' => 'required|string|in:' . implode(',', Brincadeira::DIFICULDADE),
-            'duracao' => 'required|string|max:255',
+            'duracao' => 'required|string|in:' . implode(',', Brincadeira::DURACAO),
             'faixa_etaria' => 'required|string|in:' . implode(',', Brincadeira::FAIXA_ETARIA),
             'favorito' => 'nullable|boolean',
             'imagem' => 'nullable|string|max:255',

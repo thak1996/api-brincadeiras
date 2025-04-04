@@ -3,6 +3,11 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\CategoriaEnum;
+use App\Enums\CustoEnum;
+use App\Enums\DificuldadeEnum;
+use App\Enums\DuracaoEnum;
+use App\Enums\FaixaEtariaEnum;
 
 class CreateBrincadeirasTable extends Migration
 {
@@ -15,12 +20,12 @@ class CreateBrincadeirasTable extends Migration
     {
         Schema::create('brincadeiras', function (Blueprint $table) {
             $table->id();
-            $table->enum('categoria', ['jogos cognitivos', 'atividades físicas', 'artes', 'atividades sociais', 'jogos de tabuleiro', 'jogos de cartas']);
-            $table->string('custo');
+            $table->enum('categoria', CategoriaEnum::valores());
+            $table->enum('custo', CustoEnum::valores());
             $table->text('descricao');
-            $table->enum('dificuldade', ['fácil', 'médio', 'difícil']);
-            $table->string('duracao');
-            $table->enum('faixa_etaria', ['crianças', 'adolescente', 'idosos']);
+            $table->enum('dificuldade', DificuldadeEnum::valores());
+            $table->enum('duracao', DuracaoEnum::valores());
+            $table->enum('faixa_etaria', FaixaEtariaEnum::valores());
             $table->boolean('favorito')->nullable()->default(false);
             $table->string('imagem')->nullable();
             $table->json('materiais');
