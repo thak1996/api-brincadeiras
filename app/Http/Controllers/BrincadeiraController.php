@@ -6,6 +6,11 @@ use App\Models\Brincadeira;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use App\Enums\CategoriaEnum;
+use App\Enums\CustoEnum;
+use App\Enums\DificuldadeEnum;
+use App\Enums\DuracaoEnum;
+use App\Enums\FaixaEtariaEnum;
 
 class BrincadeiraController extends Controller
 {
@@ -19,12 +24,12 @@ class BrincadeiraController extends Controller
     public function store(Request $request): JsonResponse
     {
         $data = $this->validate($request, [
-            'categoria' => 'required|string|in:' . implode(',', Brincadeira::CATEGORIA),
-            'custo' => 'required|string|in:' . implode(',', Brincadeira::CUSTO),
+            'categoria' => 'required|string|in:' . implode(',', CategoriaEnum::valores()),
+            'custo' => 'required|string|in:' . implode(',', CustoEnum::valores()),
             'descricao' => 'required|string',
-            'dificuldade' => 'required|string|in:' . implode(',', Brincadeira::DIFICULDADE),
-            'duracao' => 'required|string|in:' . implode(',', Brincadeira::DURACAO),
-            'faixa_etaria' => 'required|string|in:' . implode(',', Brincadeira::FAIXA_ETARIA),
+            'dificuldade' => 'required|string|in:' . implode(',', DificuldadeEnum::valores()),
+            'duracao' => 'required|string|in:' . implode(',', DuracaoEnum::valores()),
+            'faixa_etaria' => 'required|string|in:' . implode(',', FaixaEtariaEnum::valores()),
             'favorito' => 'nullable|boolean',
             'imagem' => 'nullable|string|max:255',
             'materiais' => 'sometimes|array',
@@ -56,12 +61,12 @@ class BrincadeiraController extends Controller
         }
 
         $data = $this->validate($request, [
-            'categoria' => 'required|string|in:' . implode(',', Brincadeira::CATEGORIA),
-            'custo' => 'required|string|in:' . implode(',', Brincadeira::CUSTO),
+            'categoria' => 'required|string|in:' . implode(',', CategoriaEnum::valores()),
+            'custo' => 'required|string|in:' . implode(',', CustoEnum::valores()),
             'descricao' => 'required|string',
-            'dificuldade' => 'required|string|in:' . implode(',', Brincadeira::DIFICULDADE),
-            'duracao' => 'required|string|in:' . implode(',', Brincadeira::DURACAO),
-            'faixa_etaria' => 'required|string|in:' . implode(',', Brincadeira::FAIXA_ETARIA),
+            'dificuldade' => 'required|string|in:' . implode(',', DificuldadeEnum::valores()),
+            'duracao' => 'required|string|in:' . implode(',', DuracaoEnum::valores()),
+            'faixa_etaria' => 'required|string|in:' . implode(',', FaixaEtariaEnum::valores()),
             'favorito' => 'nullable|boolean',
             'imagem' => 'nullable|string|max:255',
             'materiais' => 'sometimes|array',
