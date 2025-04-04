@@ -84,12 +84,6 @@ Para mudanças maiores, abra uma issue primeiro para discutirmos o que você gos
 
 ---
 
-## 📄 Licença
-
-[MIT](LICENSE)
-
----
-
 ## 👤 Autor
 
 **Franklyn Viana dos Santos**  
